@@ -1,13 +1,13 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'objective/ci/version'
+require 'objective_ci/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "objective-ci"
-  spec.version       = Objective::Ci::VERSION
+  spec.version       = ObjectiveCi::VERSION
   spec.authors       = ["Mark Larsen"]
-  spec.email         = ["larse503@gmail.com"]
+  spec.email         = ["mark.larsen@sportngin.com"]
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
   spec.homepage      = ""
