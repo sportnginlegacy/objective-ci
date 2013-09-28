@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
-puts `binaries/#{__FILE__} #{ARGV.join(" ")}`
+require 'pathname'
+pn = Pathname.new(__FILE__).basename
+puts `#{pn.dirname}/binaries/#{pn.basename} #{ARGV.join(" ")}`
