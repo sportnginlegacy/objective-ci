@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ObjectiveCi::VERSION
   spec.authors       = ["Mark Larsen"]
   spec.email         = ["mark.larsen@sportngin.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{CI tools for objective-c}
+  spec.summary       = %q{CI tools for objective-c}
   spec.homepage      = ""
   spec.license       = "MIT"
 
