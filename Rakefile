@@ -11,7 +11,7 @@ namespace :bin do
   require 'pathname'
   pn = Pathname.new(__FILE__)
   opts = ARGV.join(" ")
-  puts `\#{pn.dirname}/../#{executable_dir_path}/\#{pn.basename} \#{opts}`
+  puts `"\#{pn.dirname}/../#{executable_dir_path}/\#{pn.basename}" \#{opts}`
         RUBY
 
         gem_binary_path = "./bin/#{binary}"
