@@ -1,0 +1,4 @@
+require 'pathname'
+pn = Pathname.new(__FILE__)
+opts = ARGV.join(" ")
+puts `#{pn.dirname}/../binaries/#{pn.basename} #{opts}`
