@@ -11,7 +11,7 @@ module ObjectiveCi
     LINE_COUNT_DESTINATION = "line-count.sc"    
 
     def initialize
-      @exclusions = ["vendor"]
+      @exclusions = []
       if using_pods?
         @exclusions << "Pods"
         `pod install`
