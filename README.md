@@ -1,4 +1,4 @@
-# Objective::Ci
+# ObjectiveCi
 
 Get up and running with useful metrics for your iOS project, integrated into a CI.
 
@@ -6,15 +6,14 @@ Get up and running with useful metrics for your iOS project, integrated into a C
 
 Add this line to your application's Gemfile:
 
-    gem 'objective-ci'
+    gem 'objective-ci', :git => 'https://github.com/SportNginLabs/objective-ci.git'
+    
+Retrieval from git is required, as the gem includes many binaries and jars, pushing the size up to ~70mb (too large for rubygems.org)
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install objective-ci
 
 ## Usage
 
@@ -26,6 +25,7 @@ require 'objective-ci'
 
 :namespace ci do
   :task build do
+    # Takes care of installing pods if Podfile is detected
     objective_ci = ObjectiveCi::CiTasks.new
     
     # Add the path of any folders/files that should not be included in the metrics
@@ -51,6 +51,9 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 
 In Jenkins, call the rake task and load in the generated files
 
+![Jenkins Screenshot](/docs/jenkins-setup.jpg)
+
+Triggering a build should now show the metrics in the build.
 
 ## Contributing
 
