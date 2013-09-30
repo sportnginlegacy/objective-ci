@@ -1,0 +1,7 @@
+require 'pathname'
+pn = Pathname.new(__FILE__)
+opts = ARGV.join(" ")
+pmd_dir = "#{pn.dirname}/.././externals/pmd-cpd"
+pmd_command =  %Q(java -Xmx512m -classpath "#{pmd_dir}/pmd-4.2.5.jar":"#{pmd_dir}/ObjCLanguage-0.0.7-SNAPSHOT.jar")
+pmd_command += %Q( net.sourceforge.pmd.cpd.CPD --files . --language ObjectiveC --encoding UTF-8 --format net.sourceforge.pmd.cpd.XMLRenderer)
+puts `#{pmd_command}`
