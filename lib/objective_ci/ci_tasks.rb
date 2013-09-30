@@ -15,6 +15,12 @@ module ObjectiveCi
       end
     end
 
+    def build(opts={})
+      lint(opts)
+      lines_of_code(opts)
+      test_suite(opts)
+    end
+
     def lint(opts={})
       requires_at_least_one_option(opts, :workspace, :project)
       requires_options(opts, :scheme)
