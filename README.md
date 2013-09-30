@@ -1,4 +1,4 @@
-# Objective::Ci
+# ObjectiveCi
 
 Get up and running with useful metrics for your iOS project, integrated into a CI.
 
