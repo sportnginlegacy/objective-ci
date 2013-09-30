@@ -51,6 +51,7 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 
 In Jenkins, call the rake task and load in the generated files
 
+![Jenkins Screenshot](/docs/jenkins-setup.jpg)
 
 ## Contributing
 
