@@ -1,4 +1,4 @@
-Copyright (c) 2013 Mark Larsen
+Copyright (c) 2013 Sport Ngin (http://sportngin.com)
 
 MIT License
 
