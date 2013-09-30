@@ -45,6 +45,9 @@ module ObjectiveCi
     def test_suite(opts={})
       requires_at_least_one_option(opts, :workspace, :project)
       requires_options(opts ,:scheme)
+      if !opts[:xcodebuild_override] && xcode_version < 5.0
+        puts_red "WARNING: Xcode version #{xcode_version} is less than 5.0, and tests will likely not run"
+      end
       
       sliced_opts = opts.select { |k, v| [:scheme, :workspace, :project].include?(k) }
       xcodebuild_opts_string = sliced_opts.reduce("") { |str, (k, v)| str += " -#{k} #{v}" }
@@ -119,8 +122,17 @@ module ObjectiveCi
           duplication_node.remove
         end
       end
-
       File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(output.to_s) }
+    end
+
+    private
+    def xcode_version
+      `xcodebuild -version`.match(/^Xcode ([0-9]+\.[0-9]+)/)[1].to_f
+    end
+
+    private 
+    def puts_red(str)
+      puts "\e[31m#{str}\e[0m"
     end
   end
 end
