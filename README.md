@@ -6,9 +6,9 @@ Get up and running with useful metrics for your iOS project, integrated into a C
 
 Add this line to your application's Gemfile:
 
-    gem 'objective-ci'
+    gem 'objective-ci', :git => 'https://github.com/SportNginLabs/objective-ci.git'
     
-Retrieval from git is required, as the gem includes man binaries and jars pushing the size up to ~70mb (too large for rubygems.org)
+Retrieval from git is required, as the gem includes many binaries and jars, pushing the size up to ~70mb (too large for rubygems.org)
 
 And then execute:
 
