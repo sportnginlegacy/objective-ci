@@ -1,3 +1,6 @@
+require 'bundler/setup'
+require 'nokogiri'
+
 module ObjectiveCi
     class CiTasks
 
@@ -5,7 +8,7 @@ module ObjectiveCi
 
     LINT_DESTINATION = "lint.xml"
     DUPLICATION_DESTINATION = "duplication.xml"
-    LINE_COUNT_DESTINATION = "line-count.sc"
+    LINE_COUNT_DESTINATION = "line-count.sc"    
 
     def initialize
       @exclusions = ["vendor"]
@@ -19,6 +22,7 @@ module ObjectiveCi
       lint(opts)
       lines_of_code(opts)
       test_suite(opts)
+      duplicate_code_detection(opts)
     end
 
     def lint(opts={})
@@ -54,6 +58,15 @@ module ObjectiveCi
                   "--duplicates --wide --details .",
                   "| grep -v #{exclusion_options_list("-e")} > #{LINE_COUNT_DESTINATION}", 
                   opts)
+    end
+
+    def duplicate_code_detection(opts={})
+      opts[:minimum_tokens] ||= 100
+      call_binary("pmd-cpd-objc",
+                  "--minimum-tokens #{opts[:minimum_tokens]}",
+                  "> #{DUPLICATION_DESTINATION}", 
+                  opts)
+      pmd_exclude
     end
 
     private
@@ -93,6 +106,21 @@ module ObjectiveCi
       if (opts.keys && keys).empty?
         raise "at least one of the options #{keys.join(", ")} is required"
       end
+    end
+
+    private
+    def pmd_exclude
+      # Unfortunately, pmd doesn't seem to provide any nice out-of-the-box way for excluding files from the results.
+      absolute_exclusions = exclusions.map { |e| "#{Dir.pwd}/./#{e}/" }
+      regex_exclusion = Regexp.new("(#{absolute_exclusions.join("|")})")
+      output = Nokogiri::XML(File.open(DUPLICATION_DESTINATION))
+      output.xpath("//duplication").each do |duplication_node|
+        if duplication_node.xpath("file").all? { |n| n["path"] =~ regex_exclusion }
+          duplication_node.remove
+        end
+      end
+
+      File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(output.to_s) }
     end
   end
 end

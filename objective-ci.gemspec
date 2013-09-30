@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency "ocunit2junit"
+  spec.add_dependency "nokogiri"
 end
