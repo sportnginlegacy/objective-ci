@@ -53,6 +53,8 @@ In Jenkins, call the rake task and load in the generated files
 
 ![Jenkins Screenshot](/docs/jenkins-setup.jpg)
 
+Triggering a build should now show the metrics in the build.
+
 ## Contributing
 
 1. Fork it
