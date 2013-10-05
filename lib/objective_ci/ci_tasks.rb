@@ -53,7 +53,7 @@ module ObjectiveCi
       xcodebuild_opts_string = sliced_opts.reduce("") { |str, (k, v)| str += " -#{k} #{v}" }
 
       xcodebuild_opts_string += " -destination name=iPad -destination-timeout=10 ONLY_ACTIVE_ARCH=NO test"
-      call_binary("xcodebuild", xcodebuild_opts_string, ">&1 | ocunit2junit", opts)
+      call_binary("xcodebuild", xcodebuild_opts_string, ">&1 | bundle exec ocunit2junit", opts)
     end
 
     def lines_of_code(opts={})
