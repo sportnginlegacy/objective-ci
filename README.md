@@ -48,6 +48,7 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 * lint => https://wiki.jenkins-ci.org/display/JENKINS/PMD+Plugin
 * lines_of_code => https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin
 * duplicate_code_detection => https://wiki.jenkins-ci.org/display/JENKINS/DRY+Plugin
+* test_suite => JUNIT reporting is built into Jenkins.
 
 In Jenkins, call the rake task and load in the generated files
 
