@@ -128,7 +128,7 @@ module ObjectiveCi
     private
     def xcode_version
       matches = `xcodebuild -version`.match(/^Xcode ([0-9]+\.[0-9]+)/)
-      matches ? matches[1] : 0.0
+      matches ? matches[1].to_f : 0.0
     end
 
     private 
