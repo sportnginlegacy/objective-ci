@@ -14,7 +14,7 @@ module ObjectiveCi
       @exclusions = []
       if using_pods?
         @exclusions << "Pods"
-        `pod install`
+        `bundle exec pod install`
       end
     end
 
@@ -93,6 +93,7 @@ module ObjectiveCi
       override_options = opts["#{binary}_override".to_sym]
       cl_options = override_options ? extra_options : "#{cl_options} #{extra_options}"
       command = "#{binary} #{cl_options} #{tail}"
+      command.prepend("bundle exec") unless binary == "xcodebuild"
       puts command
       `#{command}`
     end
