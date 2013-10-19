@@ -69,7 +69,7 @@ module ObjectiveCi
       # doesn't work correctly.
       call_binary("pmd-cpd-objc",
                   "--minimum-tokens #{opts[:minimum_tokens]}",
-                  "LC_CTYPE=C LANG=C sed 's/\\/\\.\\//\\//' > #{DUPLICATION_DESTINATION}", 
+                  "| LC_CTYPE=C LANG=C sed 's/\\/\\.\\//\\//' > #{DUPLICATION_DESTINATION}", 
                   opts)
       pmd_exclude
     end
