@@ -65,9 +65,11 @@ module ObjectiveCi
 
     def duplicate_code_detection(opts={})
       opts[:minimum_tokens] ||= 100
+      # Use `sed` to change paths like `/some/code/./path.m` to `/some/code/path.m`, or else the Violations plugin in Jenkins
+      # doesn't work correctly.
       call_binary("pmd-cpd-objc",
                   "--minimum-tokens #{opts[:minimum_tokens]}",
-                  "> #{DUPLICATION_DESTINATION}", 
+                  "LC_CTYPE=C LANG=C sed 's/\\/\\.\\//\\//' > #{DUPLICATION_DESTINATION}", 
                   opts)
       pmd_exclude
     end
