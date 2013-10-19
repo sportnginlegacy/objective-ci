@@ -25,7 +25,7 @@ require 'objective-ci'
 
 :namespace ci do
   :task build do
-    # Takes care of installing pods if Podfile is detected
+    # Takes care of installing pods and adding "Pods" to exclusions if Podfile is detected
     objective_ci = ObjectiveCi::CiTasks.new
     
     # Add the path of any folders/files that should not be included in the metrics
@@ -36,7 +36,7 @@ require 'objective-ci'
     
     # Or, choose which metrics you want to run on your project (or workspace)
     objective_ci.lint(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates lint.xml
-    objective_ci.test_suite(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates test-reports/
+    objective_ci.test_suite(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates test-reports/*.xml
     objective_ci.lines_of_code # Generates line-count.sc
     objective_ci.duplicate_code_detection # Generates duplication.xml
   end
@@ -47,12 +47,13 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 
 * lint => https://wiki.jenkins-ci.org/display/JENKINS/PMD+Plugin
 * lines_of_code => https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin
-* duplicate_code_detection => https://wiki.jenkins-ci.org/display/JENKINS/DRY+Plugin
+* duplicate_code_detection => https://wiki.jenkins-ci.org/display/JENKINS/Violations
 * test_suite => JUNIT reporting is built into Jenkins.
 
 In Jenkins, call the rake task and load in the generated files
 
 ![Jenkins Screenshot](/docs/jenkins-setup.jpg)
+![Jenkins Screenshot - Violations](/docs/jenkins-setup-violations.png)
 
 Triggering a build should now show the metrics in the build.
 
