@@ -117,7 +117,7 @@ module ObjectiveCi
     private
     def pmd_exclude
       # Unfortunately, pmd doesn't seem to provide any nice out-of-the-box way for excluding files from the results.
-      absolute_exclusions = exclusions.map { |e| "#{Dir.pwd}/./#{e}/" }
+      absolute_exclusions = exclusions.map { |e| "#{Dir.pwd}/#{e}/" }
       regex_exclusion = Regexp.new("(#{absolute_exclusions.join("|")})")
       output = Nokogiri::XML(File.open(DUPLICATION_DESTINATION))
       output.xpath("//duplication").each do |duplication_node|
