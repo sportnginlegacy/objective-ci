@@ -25,7 +25,7 @@ require 'objective-ci'
 
 :namespace ci do
   :task build do
-    # Takes care of installing pods if Podfile is detected
+    # Takes care of installing pods and adding "Pods" to exclusions if Podfile is detected
     objective_ci = ObjectiveCi::CiTasks.new
     
     # Add the path of any folders/files that should not be included in the metrics
