@@ -36,7 +36,7 @@ require 'objective-ci'
     
     # Or, choose which metrics you want to run on your project (or workspace)
     objective_ci.lint(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates lint.xml
-    objective_ci.test_suite(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates test-reports/
+    objective_ci.test_suite(:project => "iPhoneProject.project", :scheme => "iPhoneProjectReleaseScheme") # Generates test-reports/*.xml
     objective_ci.lines_of_code # Generates line-count.sc
     objective_ci.duplicate_code_detection # Generates duplication.xml
   end
