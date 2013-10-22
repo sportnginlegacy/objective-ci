@@ -47,7 +47,7 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 
 * lint => https://wiki.jenkins-ci.org/display/JENKINS/PMD+Plugin
 * lines_of_code => https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin
-* duplicate_code_detection => https://wiki.jenkins-ci.org/display/JENKINS/Violations
+* duplicate_code_detection => https://wiki.jenkins-ci.org/display/JENKINS/Violations (This could technically be used for lint also, but PMD has friendlier sorting on the front-end)
 * test_suite => JUNIT reporting is built into Jenkins.
 
 In Jenkins, call the rake task and load in the generated files
@@ -56,6 +56,27 @@ In Jenkins, call the rake task and load in the generated files
 ![Jenkins Screenshot - Violations](/docs/jenkins-setup-violations.png)
 
 Triggering a build should now show the metrics in the build.
+
+## Advanced
+
+If you peruse the binaries that `objective-ci` is using, and their documentation, you might find that you'd like to throw in some extra configurations. Go wild.
+(OCLint 0.8dev)[http://docs.oclint.org/en/dev/]
+(SLOCCount)[http://www.dwheeler.com/sloccount/]
+(xcodebuild)[https://www.google.com/url?sa=f&rct=j&url=http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html&q=&esrc=s&ei=kB5mUvyQCbL62gWN8IGgAg&usg=AFQjCNG065ry1JvpdG4kiuAmQZTP-yotRQ]
+
+These binaries currently support extra command-line arguments by passing in the option `:binaryname_options => "--your "options"`
+
+For example, if you'd like to setup `OCLint` to only generate warning when lines exceed 120 characters in length, you could do
+```ruby
+  objective_ci = ObjectiveCi::CiTasks.new
+  objective_ci.build(:workspace => "FooApp.xcworkspace",
+                     :scheme => "FooApp",
+                     :"oclint-json-compilation-database_options" => "-rc=LONG_LINE=120")
+```
+
+In addition to these blanked `:binaryname_options` options, a few tasks support additional options.
+
+* `duplicate_code` supports `:minimum_tokens`, which defaults to 100. This value will determine what the minimum amount of duplicated tokens is to constitute as a copy and paste violation.
 
 ## Contributing
 
