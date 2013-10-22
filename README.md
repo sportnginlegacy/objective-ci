@@ -60,9 +60,10 @@ Triggering a build should now show the metrics in the build.
 ## Advanced
 
 If you peruse the binaries that `objective-ci` is using, and their documentation, you might find that you'd like to throw in some extra configurations. Go wild.
-[OCLint 0.8dev](http://docs.oclint.org/en/dev/)
-[SLOCCount](http://www.dwheeler.com/sloccount/)
-[xcodebuild](https://www.google.com/url?sa=f&rct=j&url=http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html&q=&esrc=s&ei=kB5mUvyQCbL62gWN8IGgAg&usg=AFQjCNG065ry1JvpdG4kiuAmQZTP-yotRQ)
+
+* [OCLint 0.8dev](http://docs.oclint.org/en/dev/)
+* [SLOCCount](http://www.dwheeler.com/sloccount/)
+* [xcodebuild](https://www.google.com/url?sa=f&rct=j&url=http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html&q=&esrc=s&ei=kB5mUvyQCbL62gWN8IGgAg&usg=AFQjCNG065ry1JvpdG4kiuAmQZTP-yotRQ)
 
 These binaries currently support extra command-line arguments by passing in the option `:binaryname_options => "--your "options"`
 
