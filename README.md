@@ -75,7 +75,7 @@ For example, if you'd like to setup `OCLint` to only generate long-line warnings
                      :"oclint-json-compilation-database_options" => "-rc=LONG_LINE=120")
 ```
 
-In addition to these blanked `:binaryname_options` options, a few tasks support additional options.
+In addition to the blanketed `:binaryname_options` options, a few tasks support additional options.
 
 * `duplicate_code` supports `:minimum_tokens`, which defaults to 100. This value will determine what the minimum amount of duplicated tokens is to constitute as a copy and paste violation.
 
