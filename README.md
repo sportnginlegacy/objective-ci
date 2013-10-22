@@ -67,7 +67,7 @@ If you peruse the binaries that `objective-ci` is using, and their documentation
 
 These binaries currently support extra command-line arguments by passing in the option `:binaryname_options => "--your "options"`
 
-For example, if you'd like to setup `OCLint` to only generate warning when lines exceed 120 characters in length, you could do
+For example, if you'd like to setup `OCLint` to only generate long-line warnings when lines exceed 120 characters in length, you could do
 ```ruby
   objective_ci = ObjectiveCi::CiTasks.new
   objective_ci.build(:workspace => "FooApp.xcworkspace",
