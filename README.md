@@ -57,6 +57,10 @@ In Jenkins, call the rake task and load in the generated files
 
 Triggering a build should now show the metrics in the build.
 
+### Code signing
+
+**Make sure to import any code signing certificates into Xcode on the continuous integration server, and to keep the provisioning profiles up to date. And, most importantly, the first time your code signing certificates are used with `objective-ci`, a dialog will appear asking you to allow `xcodebuild` to access the keychain. Click `always allow`**
+
 ## Advanced
 
 If you peruse the binaries that `objective-ci` is using, and their documentation, you might find that you'd like to throw in some extra configurations. Go wild.
