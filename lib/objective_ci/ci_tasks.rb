@@ -72,6 +72,7 @@ module ObjectiveCi
                   "| LC_CTYPE=C LANG=C sed 's/\\/\\.\\//\\//' > #{DUPLICATION_DESTINATION}", 
                   opts)
       pmd_exclude
+      pmd_patch
     end
 
     private
@@ -126,6 +127,13 @@ module ObjectiveCi
         end
       end
       File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(output.to_s) }
+    end
+
+    private
+    def pmd_patch
+      # Make sure encoding is UTF-8, or else Jenkins DRY plugin will fail to parse.
+      new_xml = Nokogiri::XML.parse(File.open(DUPLICATION_DESTINATION).read, nil, "UTF-8")
+      File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(new_xml.to_s) }
     end
 
     private
