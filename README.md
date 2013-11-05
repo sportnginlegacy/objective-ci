@@ -45,13 +45,12 @@ The CI server of choice is Jenkins -- install the plugins for the metrics you pl
 
 * lint: https://wiki.jenkins-ci.org/display/JENKINS/PMD+Plugin
 * lines_of_code: https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin
-* duplicate_code_detection: https://wiki.jenkins-ci.org/display/JENKINS/Violations (This could technically be used for lint also, but PMD has friendlier sorting on the front-end)
+* duplicate_code_detection: https://wiki.jenkins-ci.org/display/JENKINS/DRY+Plugin
 * test_suite: JUNIT reporting is built into Jenkins.
 
 In Jenkins, call the rake task and load in the generated files
 
 ![Jenkins Screenshot](/docs/jenkins-setup.jpg)
-![Jenkins Screenshot - Violations](/docs/jenkins-setup-violations.png)
 
 Triggering a build should now show the metrics in the build.
 
