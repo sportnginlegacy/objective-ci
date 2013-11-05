@@ -72,9 +72,9 @@ module ObjectiveCi
                   "| LC_CTYPE=C LANG=C sed 's/\\/\\.\\//\\//' > #{DUPLICATION_DESTINATION}", 
                   opts)
       pmd_exclude
+      pmd_patch
     end
 
-    private
     def exclusion_options_list(option_flag)
       if exclusions.empty?
         ''
@@ -83,13 +83,13 @@ module ObjectiveCi
         "#{option_flag} #{wrapped_exclusions.join(" #{option_flag} ")}"
       end
     end
+    private :exclusion_options_list
 
-    private
     def using_pods?
-      File.exists?("Podfile")
+      File.exists?("Podfile") || File.exists?("podfile")
     end
+    private :using_pods?
 
-    private
     def call_binary(binary, cl_options, tail, opts={})
       extra_options = opts["#{binary}_options".to_sym]
       override_options = opts["#{binary}_override".to_sym]
@@ -99,22 +99,22 @@ module ObjectiveCi
       puts command
       puts `#{command}`
     end
+    private :call_binary
 
-    private 
     def requires_options(opts, *keys)
       keys.each do |k|
         raise "option #{k} is required." unless opts.has_key?(k)
       end
     end
+    private :requires_options
 
-    private
     def requires_at_least_one_option(opts, *keys)
       if (opts.keys && keys).empty?
         raise "at least one of the options #{keys.join(", ")} is required"
       end
     end
+    private :requires_at_least_one_option
 
-    private
     def pmd_exclude
       # Unfortunately, pmd doesn't seem to provide any nice out-of-the-box way for excluding files from the results.
       absolute_exclusions = exclusions.map { |e| "#{Dir.pwd}/#{e}/" }
@@ -127,16 +127,25 @@ module ObjectiveCi
       end
       File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(output.to_s) }
     end
+    private :pmd_exclude
 
-    private
+    def pmd_patch
+      # Make sure encoding is UTF-8, or else Jenkins DRY plugin will fail to parse.
+      new_xml = Nokogiri::XML.parse(File.open(DUPLICATION_DESTINATION).read, nil, "UTF-8")
+      File.open(DUPLICATION_DESTINATION, 'w') { |file| file.write(new_xml.to_s) }
+    end
+    private :pmd_patch
+
     def xcode_version
       matches = `xcodebuild -version`.match(/^Xcode ([0-9]+\.[0-9]+)/)
       matches ? matches[1].to_f : 0.0
     end
+    private :xcode_version
 
-    private 
     def puts_red(str)
       puts "\e[31m#{str}\e[0m"
     end
+    private :puts_red
+    
   end
 end
