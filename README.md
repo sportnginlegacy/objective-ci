@@ -21,8 +21,8 @@ In your rakefile, make a new task
 require 'bundler/setup'
 require 'objective-ci'
 
-:namespace ci do
-  :task build do
+namespace :ci do
+  task :build do
     # Takes care of installing pods and adding "Pods" to exclusions if Podfile is detected
     objective_ci = ObjectiveCi::CiTasks.new
     
