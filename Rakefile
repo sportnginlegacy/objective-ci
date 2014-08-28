@@ -2,11 +2,11 @@ require "bundler/gem_tasks"
 
 namespace :bin do
   task :setup do
-      binaries_location = "./externals"
-      %W(sloccount oclint/bin).each do |executable_dir|
-        executable_dir_path = "#{binaries_location}/#{executable_dir}"
-        binaries = Dir.entries(executable_dir_path).select {|f| !File.directory? f}
-        binaries.each do |binary|
+    binaries_location = "./externals"
+    %W(sloccount oclint/bin).each do |executable_dir|
+      executable_dir_path = "#{binaries_location}/#{executable_dir}"
+      binaries = Dir.entries(executable_dir_path).select {|f| !File.directory? f}
+      binaries.each do |binary|
         contents = <<-RUBY
   require 'pathname'
   pn = Pathname.new(__FILE__)
